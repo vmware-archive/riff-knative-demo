@@ -46,3 +46,7 @@ We can deploy the function with the following command:
 Or use the shortcut script:
 
     ./scripts/java-create.sh textdisplay Pivotal-Field-Engineering/riff-knative-demo java-fun-textdisplay
+
+Now, use the shortcut script to run the function with different numeric inputs:
+
+    ./scripts/invoke.sh textdisplay 4298
