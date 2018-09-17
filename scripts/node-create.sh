@@ -1,5 +1,5 @@
 # Usage: node-create [artifact-name] [git-repo-path] [image-name]
-# Example: node-create square cpage-pivotal/knative-examples node-fun-square
+# Example: node-create square Pivotal-Field-Engineering/riff-knative-demo node-fun-square
 
 riff service delete $1
 
