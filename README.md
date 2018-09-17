@@ -41,8 +41,8 @@ We can deploy the function with the following command:
 
     riff function create java textdisplay \
       --git-repo https://github.com/Pivotal-Field-Engineering/riff-knative-demo.git \
-      --artifact textdisplay.jar --handler textdisplay --image cepage/textdisplay
+      --artifact textdisplay.jar --handler textdisplay --image cepage/java-fun-textdisplay
 
 Or use the shortcut script:
 
-    ./scripts/
+    ./scripts/java-create.sh textdisplay Pivotal-Field-Engineering/riff-knative-demo java-fun-textdisplay
