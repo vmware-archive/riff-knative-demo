@@ -91,9 +91,13 @@ Now, we'll increase the load from 1 message/sec to 200 messages/sec.
     
 On weave you will see a lot of new pods spin up to increase concurrent processing of messages and maintain throughput through the channels. 
 
+![Scaling](https://raw.githubusercontent.com/Pivotal-Field-Engineering/riff-knative-demo/master/images/scale.png)
+
+PFS can scale up in seconds on-demand, and scale to zero when there are no outstanding workloads. This enables extremely efficient usage of cloud infrastructure resources.
+
 <h3>Cleanup</h3>
 
-At the end of the demo, use the following script to delete the services and channels we created:
+At the end of the demo, use the following script to delete the services and channels we created, and reset for the next demo run:
 
     ./scripts/cleanup.sh
     
