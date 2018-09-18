@@ -50,3 +50,33 @@ Or use the shortcut script:
 Now, use the shortcut script to run the function with different numeric inputs:
 
     ./scripts/invoke.sh textdisplay 4298
+    
+<h3>Chaining Functions</h3>
+
+So far, we have demonstrated request-response on a single function. Now, we will use Riff channels to build a chain of polyglot functions. We will add a new function called Generator that creates a stream of randomly generated numbers (between 0 and 1000), and then runs them through our previously generated functions through named channels:
+
+![Chaining](https://raw.githubusercontent.com/Pivotal-Field-Engineering/riff-knative-demo/master/images/channels.png)
+
+The generator function outputs random numbers onto the numbers channel, where our powerof2 function picks it ups and puts its results into the squares channel, which our textdisplay function uses as inputs.
+
+Create the channels with the following commands:
+
+    riff channel create numbers --cluster-bus stub
+    riff channel create squares --cluster-bus stub
+    
+Deploy the generator function to stream the random numbers:
+
+    riff service create random --image jldec/random:v0.0.2
+    
+Now, wire up the connections between your functions and channels:
+
+    riff service subscribe powerof2 --input numbers --output squares
+    riff service subscribe textdisplay --input squares
+    
+It's time to start the stream. Use the following script to tell generator to emit a slow stream (1/s) of numbers onto the channel:
+
+    ./scripts/slowstream.sh
+    
+In the bottom terminal window for container logs, use the following script to see what the textdisplay function is doing at the end of the pipeline:
+
+    ./scripts/logs.sh textdisplay
