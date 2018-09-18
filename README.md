@@ -66,7 +66,7 @@ Create the channels with the following commands:
     
 Deploy the generator function to stream the random numbers:
 
-    riff service create random --image jldec/random:v0.0.2
+    riff service create generator --image jldec/random:v0.0.2
     
 Now, wire up the connections between your functions and channels:
 
@@ -77,6 +77,23 @@ It's time to start the stream. Use the following script to tell generator to emi
 
     ./scripts/slowstream.sh
     
+In weave, you will see instances of generator, then powerof2, then textdisplay spin up as traffic progresses through the pipeline.
+    
 In the bottom terminal window for container logs, use the following script to see what the textdisplay function is doing at the end of the pipeline:
 
     ./scripts/logs.sh textdisplay
+    
+<h3>Scale for Increased Load</h3>
+
+Now, we'll increase the load from 1 message/sec to 200 messages/sec.
+
+    ./scripts/faststream.sh
+    
+On weave you will see a lot of new pods spin up to increase concurrent processing of messages and maintain throughput through the channels. 
+
+<h3>Cleanup</h3>
+
+At the end of the demo, use the following script to delete the services and channels we created:
+
+    ./scripts/cleanup.sh
+    
