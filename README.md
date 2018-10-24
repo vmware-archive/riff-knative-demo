@@ -8,13 +8,19 @@ Here is the recommended window layout for running the demo: 2 terminal windows o
 
 Before jumping into the code, you may want to introduce the basic concepts of Knative (build, eventing, serving), and talk about how Riff is built on this foundation. See the demo recording for an example of this talk track.
 
+<h3>Container Registry and Setup References</h3>
+```bash
+export DOCKER_ID=<your_docker_id>
+```
+> for GCR use gcr.io/<project_id>
+
 <h3>Node.js Example</h3>
 
 Show <b>powerof2.js</b> in the repo root directory, a simple node function which returns the square of the integer input. Make sure that the weavescope window is showing the default namespace. Execute the following command:
 
     riff function create node powerof2 \
       --git-repo https://github.com/Pivotal-Field-Engineering/riff-knative-demo.git \
-      --artifact powerof2.js --image cepage/node-fun-powerof2
+      --artifact powerof2.js --image $DOCKER_ID/node-fun-powerof2 --wait
     
 Alternatively, you can use the shortcut script to execute the same command:
 
@@ -70,8 +76,8 @@ Deploy the generator function to stream the random numbers:
     
 Now, wire up the connections between your functions and channels:
 
-    riff service subscribe powerof2 --input numbers --output squares
-    riff service subscribe textdisplay --input squares
+    riff subscription create --subscriber powerof2 --channel numbers --reply-to squares
+    riff subscription create --subscriber textdisplay --channel squares
     
 It's time to start the stream. Use the following script to tell generator to emit a slow stream (1/s) of numbers onto the channel:
 

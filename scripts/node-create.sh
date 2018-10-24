@@ -6,5 +6,7 @@ riff service delete $1
 riff function create node $1 \
   --git-repo https://github.com/$2.git \
   --artifact $1.js \
-  --image cepage/$3
+  --image $DOCKER_ID/$3 \
+  --verbose \
+  --wait
   
