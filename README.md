@@ -46,12 +46,14 @@ For a more interesting function, look at the code for TextDisplay.java in the ro
 We can deploy the function with the following command:
 
     riff function create java textdisplay \
-      --git-repo https://github.com/Pivotal-Field-Engineering/riff-knative-demo.git \
-      --artifact textdisplay.jar --handler textdisplay --image cepage/java-fun-textdisplay
+      --local-path textdisplay \
+      --image $DOCKER_ID/textdisplay \
+      --verbose \
+      --wait
 
 Or use the shortcut script:
 
-    ./scripts/java-create.sh textdisplay Pivotal-Field-Engineering/riff-knative-demo java-fun-textdisplay
+    ./scripts/java-create.sh textdisplay textdisplay
 
 Now, use the shortcut script to run the function with different numeric inputs:
 
