@@ -3,5 +3,5 @@ riff service delete powerof2
 riff service delete textdisplay
 riff channel delete numbers
 riff channel delete squares
-kubectl subscription delete powerof2
-kubectl subscription delete textdisplay
+riff subscription delete powerof2
+riff subscription delete textdisplay

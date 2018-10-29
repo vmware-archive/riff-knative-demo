@@ -7,6 +7,5 @@ riff function create node $1 \
   --git-repo https://github.com/$2.git \
   --artifact $1.js \
   --image $DOCKER_ID/$3 \
-  --verbose \
-  --wait
+  --verbose
   

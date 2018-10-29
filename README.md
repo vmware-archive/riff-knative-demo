@@ -8,6 +8,8 @@ Here is the recommended window layout for running the demo: 2 terminal windows o
 
 Before jumping into the code, you may want to introduce the basic concepts of Knative (build, eventing, serving), and talk about how Riff is built on this foundation. See the demo recording for an example of this talk track.
 
+>If you are working in your own cluster, you can follow these instructions to [install Weave Scope](https://www.weave.works/docs/scope/latest/installing/#k8s)
+
 <h3>Container Registry and Setup References</h3>
 ```bash
 export DOCKER_ID=<your_docker_id>
@@ -20,7 +22,7 @@ Show <b>powerof2.js</b> in the repo root directory, a simple node function which
 
     riff function create node powerof2 \
       --git-repo https://github.com/Pivotal-Field-Engineering/riff-knative-demo.git \
-      --artifact powerof2.js --image $DOCKER_ID/node-fun-powerof2 --wait
+      --artifact powerof2.js --image $DOCKER_ID/node-fun-powerof2 --verbose
     
 Alternatively, you can use the shortcut script to execute the same command:
 
@@ -48,8 +50,7 @@ We can deploy the function with the following command:
     riff function create java textdisplay \
       --local-path textdisplay \
       --image $DOCKER_ID/textdisplay \
-      --verbose \
-      --wait
+      --verbose
 
 Or use the shortcut script:
 
