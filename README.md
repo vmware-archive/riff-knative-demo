@@ -1,7 +1,7 @@
 # riff-knative-demo
 This is a walkthrough of the Riff on Knative (PFS) demo at the SpringOne Platform 2018 Pivotal demo booth. You can view a recording of this demo here: https://goo.gl/7m97K1
 
-<h3>Setup</h3>
+## Setup
 Here is the recommended window layout for running the demo: 2 terminal windows on the left, and a browser window on the right. The top terminal window is for running commands, and the current directory should be the root of a copy of this repo. The bottom is for viewing live container logs. The browser window should open to http://s1p-weave.corby.cc, where you will see a weavescope visualization of our Kubernetes cluster. Select the "Pods" view from the top-level menu of weave. Have a second tab open to this repo, so that you can navigate to code examples as we go along. Version 0.1.2 of the riff cli should be installed on your demo workstation.
 
 ![Desktop Layout](https://raw.githubusercontent.com/Pivotal-Field-Engineering/riff-knative-demo/master/images/layout.png)
@@ -10,13 +10,15 @@ Before jumping into the code, you may want to introduce the basic concepts of Kn
 
 >If you are working in your own cluster, you can follow these instructions to [install Weave Scope](https://www.weave.works/docs/scope/latest/installing/#k8s)
 
-<h3>Container Registry and Setup References</h3>
+### Container Registry and Setup References
+
 ```bash
 export DOCKER_ID=<your_docker_id>
 ```
+
 > for GCR use gcr.io/<project_id>
 
-<h3>Node.js Example</h3>
+## Node.js Example
 
 Show <b>powerof2.js</b> in the repo root directory, a simple node function which returns the square of the integer input. Make sure that the weavescope window is showing the default namespace. Execute the following command:
 
@@ -41,7 +43,7 @@ Or, use this script shortcut:
     
 You can try different values and see how the function handler responds. Later on, you'll notice in weavescope that the deployment automatically scales down to zero instances when there has been no traffic for a while.
 
-<h3>Java Example</h3>
+## Java Example
 
 For a more interesting function, look at the code for TextDisplay.java in the root folder. It takes a numeric input, and converts it into a textual representation of the number. The code uses Spring's `<bean>` annotation to expose the function as a bean. We have packaged the code into a Spring Boot jar which is stored in the Github repo.
 
@@ -60,7 +62,7 @@ Now, use the shortcut script to run the function with different numeric inputs:
 
     ./scripts/invoke.sh textdisplay 4298
     
-<h3>Chaining Functions</h3>
+## Chaining Functions
 
 So far, we have demonstrated request-response on a single function. Now, we will use Riff channels to build a chain of polyglot functions. We will add a new function called Generator that creates a stream of randomly generated numbers (between 0 and 1000), and then runs them through our previously generated functions through named channels:
 
@@ -92,7 +94,7 @@ In the bottom terminal window for container logs, use the following script to se
 
     ./scripts/logs.sh textdisplay
     
-<h3>Scale for Increased Load</h3>
+## Scale for Increased Load
 
 Now, we'll increase the load from 1 message/sec to 200 messages/sec.
 
